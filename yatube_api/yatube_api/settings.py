@@ -1,12 +1,9 @@
-from datetime import timedelta
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
+from datetime import timedelta
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = str(os.getenv('SECRET_KEY'))
+SECRET_KEY = 'hhz7l-ltdismtf@bzyz+rple7*s*w$jak%whj@(@u0eok^f9k4'
 
 DEBUG = True
 
@@ -21,8 +18,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'djoser',
-    'posts.apps.PostsConfig',
-    'api.apps.ApiConfig',
+    'api',
+    'posts',
 ]
 
 MIDDLEWARE = [
@@ -64,20 +61,16 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': ('django.contrib.auth.password_validation'
-                 '.UserAttributeSimilarityValidator'),
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': ('django.contrib.auth.password_validation'
-                 '.MinimumLengthValidator'),
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': ('django.contrib.auth.password_validation'
-                 '.CommonPasswordValidator'),
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': ('django.contrib.auth.password_validation'
-                 '.NumericPasswordValidator'),
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 
@@ -97,12 +90,11 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static/'),)
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
-    # "EXCEPTION_HANDLER": ("yatube_api.error_handler.custom_exception_handler"),
 }
 
 SIMPLE_JWT = {
